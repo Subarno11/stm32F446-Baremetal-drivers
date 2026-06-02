@@ -124,9 +124,9 @@ void USART_ApplicationEventCallback(USART_Handle_t *pUSARTHandle,uint8_t AppEv){
 		if(state == RECIEVE_LEN){
 			printf("Rcvd Len : %d\n",Len);
 			state = RECIEVE_DATA;
-			uint8_t status;
+			//uint8_t status;
 
-			status = USART_ReceiveDataIT(pUSARTHandle, rcv_Buff, Len);
+			//status = USART_ReceiveDataIT(pUSARTHandle, rcv_Buff, Len);
 
 			//printf("Status = %d\n", status);
 		}

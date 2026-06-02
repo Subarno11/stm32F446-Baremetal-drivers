@@ -47,6 +47,7 @@
 								</option>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="false" id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.includepaths.2091232560" name="Include paths (-I)" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.includepaths" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="../Inc"/>
+									<listOptionValue builtIn="false" value="D:/MCU1 Files/MCU1/stm32f4xx_drivers/bsp"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/drivers/Inc}&quot;"/>
 								</option>
 								<option IS_BUILTIN_EMPTY="false" IS_VALUE_EMPTY="true" id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.includefiles.525502090" name="Include files (-include)" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.option.includefiles" useByScannerDiscovery="false" valueType="includeFiles"/>
@@ -79,7 +80,7 @@
 					</folderInfo>
 					<sourceEntries>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Inc"/>
-						<entry excluding="017uart_rx.c|016uart_tx.c|015i2c_SlaveSTM32_chunkingData.c|014_i2c_SlaveSTM32IT.c|013i2c_master_rx_EventDrivenStateMachine.c|012i2c_master_rx_testingIT2.c|011i2c_master_rx_testing.c|010i2c_master_tx_testing.c|009spi_msg_rcv_it.c|008spi_cmd_handling.c|syscalls.c|007spi_txonly_arduino.c|002led_button.c|006spi_tx_testing.c|005button_intterupt.c|003ledToggleExtBtn.c|001led_toggle.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Src"/>
+						<entry excluding="018usart_transmissionIT.c|017uart_rx.c|016uart_tx.c|015i2c_SlaveSTM32_chunkingData.c|014_i2c_SlaveSTM32IT.c|013i2c_master_rx_EventDrivenStateMachine.c|012i2c_master_rx_testingIT2.c|011i2c_master_rx_testing.c|010i2c_master_tx_testing.c|009spi_msg_rcv_it.c|008spi_cmd_handling.c|syscalls.c|007spi_txonly_arduino.c|002led_button.c|006spi_tx_testing.c|005button_intterupt.c|003ledToggleExtBtn.c|001led_toggle.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Src"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Startup"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="bsp"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="drivers"/>

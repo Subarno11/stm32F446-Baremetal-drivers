@@ -2,7 +2,7 @@
 
 A complete STM32 bare-metal driver development project built from scratch using Embedded C and register-level programming.<br>
 No HAL libraries were used for peripheral operation.<br>
-Developed as part of the MCU1 Embedded Systems learning journey.
+Developed as part of the  Embedded Systems learning journey.
 
 ---
 
@@ -48,44 +48,22 @@ Developed as part of the MCU1 Embedded Systems learning journey.
 ## 🛠️ Technologies Used
 
 * Embedded C
-* STM32F4 Series Microcontroller
+* STM32F446ReTx Nucleo Series Microcontroller
 * ARM Cortex-M4 Architecture
 * Register-Level Programming
 * STM32CubeIDE
-* Git & GitHub
-
----
-
-## 📂 Repository Structure
-
-```text
-.
-├── Drivers
-│   ├── Inc
-│   └── Src
-│
-├── Applications
-│   ├── GPIO_Test
-│   ├── SPI_Test
-│   ├── I2C_Test
-│   └── USART_Test
-│
-└── README.md
-```
-
 ---
 
 ## 🧪 Test Applications
 
 The drivers were verified through multiple hardware test applications:
 
-* LED Control using GPIO
+* LED Control using GPIOs
 * Push Button Interrupt Handling
-* SPI Communication between STM32 and Arduino
-* I2C Peripheral Communication
-* USART Transmission and Reception
-* Interrupt-Based Communication Tests
-
+* SPI Communication between STM32 and Arduino by both polling and non polling APIs
+* I2C Peripheral Communication by both polling and non polling APIs
+* USART Transmission and Reception by both polling and non polling APIs
+* Interrupt-Based Communication Test using the method of Event driven State Machines
 ---
 
 ## 📚 What I Learned
@@ -101,23 +79,10 @@ The drivers were verified through multiple hardware test applications:
 
 ---
 
-## 🎯 Future Improvements
-
-* SysTick Driver
-* RTC Driver
-* General Purpose Timers
-* PWM Driver
-* ADC Driver
-* DMA Driver
-* LCD Interfacing
-* Complete Embedded Projects Using These Drivers
-
----
-
 ## 👨‍💻 Author
 
 **Subarno Pal**<br>
 B.Tech, Electronics & Communication Engineering<br>
 National Institute of Technology Durgapur<br>
 
-Interested in Embedded Systems, Firmware Development, Robotics, IoT and VLSI.
+Interested in Embedded Systems, Firmware Development.

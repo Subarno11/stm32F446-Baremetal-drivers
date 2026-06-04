@@ -6,7 +6,7 @@ Developed as part of the  Embedded Systems learning journey.
 
 ---
 
-## 🚀 Features
+## 🚀 Features of Driver Layer
 
 ### GPIO Driver
 
@@ -43,6 +43,15 @@ Developed as part of the  Embedded Systems learning journey.
 * Baud Rate Configuration
 * USART Interrupt Handling
 
+### BSP (Board Support Package)
+
+The BSP layer contains board-level peripheral modules built on top of the generic drivers. It abstracts hardware-specific details from the respective datasheets and provides easy-to-use APIs for application development.
+
+Implemented modules:
+- **DS1307 RTC Driver** – Time and date configuration and retrieval over I2C.
+- **16x2 LCD Driver** – LCD initialization, command handling, and data display functions.
+
+The BSP layer utilizes the underlying GPIO and I2C drivers while exposing higher-level application-friendly interfaces.
 ---
 
 ## 🛠️ Technologies Used

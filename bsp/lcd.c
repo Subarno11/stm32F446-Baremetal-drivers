@@ -9,8 +9,12 @@
 #include "lcd.h"
 static void write_4_bits(uint8_t value);
 static void lcd_enable(void);
-static void mdelay(uint32_t cnt);
-static void udelay(uint32_t cnt);
+
+#define SYST_CSR   (*(volatile uint32_t*)0xE000E010)
+#define SYST_RVR   (*(volatile uint32_t*)0xE000E014)
+#define SYST_CVR   (*(volatile uint32_t*)0xE000E018)
+
+#define SYSTICK_TIM_CLK 16000000U
 
 void lcd_send_cmd(uint8_t cmd){
 	//RS = 0 , for LCD Command
@@ -26,7 +30,7 @@ void lcd_send_cmd(uint8_t cmd){
 
 }
 
-void lcd_send_data(uint8_t data){
+void lcd_print_char(uint8_t data){
 	//RS = 0 , for LCD Command
 	GPIO_WriteToOutputPin(LCD_GPIO_PORT, LCD_GPIO_PIN_RS, GPIO_PIN_SET);
 	//Already RW = 0 (Directly Grounded)
@@ -36,6 +40,47 @@ void lcd_send_data(uint8_t data){
 	write_4_bits(data & 0x0F);
 
 	udelay(50); //Execution time > 37 micro sec
+}
+
+void lcd_print_string(char *msg)
+{
+    while(*msg)
+    {
+        lcd_print_char((uint8_t)*msg++);
+    }
+}
+
+void lcd_display_clear_cmd(void){
+	lcd_send_cmd(LCD_CMD_DIS_CLEAR);
+
+	mdelay(2);
+}
+
+//Cursor returns to the Home Position:
+void lcd_display_return_home(void){
+	lcd_send_cmd(LCD_CMD_DIS_RETURN_HOME);
+
+	mdelay(2);
+}
+
+/*
+ * Set LCD to a specified location given by row and column coordinates
+ * Row number (1 to 2)
+ * Column number (1 to 16)
+ */
+void lcd_set_cursor(uint8_t row , uint8_t col){
+	col--;
+	switch (row) {
+		case 1:
+			lcd_send_cmd((col |= 0x80));
+			break;
+		case 2:
+			lcd_send_cmd((col |= 0xC0));
+			break;
+
+		default:
+			break;
+	}
 }
 void lcd_init(void){
 	//1. Configure the GPIO Pins which are used for LCD connections
@@ -86,23 +131,25 @@ void lcd_init(void){
 
 	write_4_bits(0x03);
 
-	//wait for 100 ms
-	mdelay(150);
+	//wait for 100 us
+	udelay(150);
 
 	write_4_bits(0x03);
+	udelay(150);
 	write_4_bits(0x02);
+	udelay(150);
 
 	//Function Set Command
-	write_4_bits(LCD_CMD_4DL_2N_5X8F);
+	lcd_send_cmd(LCD_CMD_4DL_2N_5X8F);
 
 	//Display On and Curesor ON Command
-	write_4_bits(LCD_CMD_DON_CURON);
+	lcd_send_cmd(LCD_CMD_DON_CURON);
 
 	//Display clear
 	lcd_display_clear_cmd();
 
 	//Entry Mode set Cmd
-	write_4_bits(LCD_CMD_INCADD);
+	lcd_send_cmd(LCD_CMD_INCADD);
 }
 
 static void write_4_bits(uint8_t value){
@@ -114,23 +161,35 @@ static void write_4_bits(uint8_t value){
 	 lcd_enable();
 }
 
-static void lcd_enable(void){
+static void lcd_enable(void)
+{
 	GPIO_WriteToOutputPin(LCD_GPIO_PORT, LCD_GPIO_PIN_EN, GPIO_PIN_SET);
-	udelay(10);
+	udelay(2);
+
 	GPIO_WriteToOutputPin(LCD_GPIO_PORT, LCD_GPIO_PIN_EN, GPIO_PIN_RESET);
-
+	udelay(50);
 }
 
-void lcd_display_clear_cmd(){
-	write_4_bits(LCD_CMD_DIS_CLEAR);
 
-	mdelay(2);
+void udelay(uint32_t us)
+{
+	SYST_RVR = (SYSTICK_TIM_CLK / 1000000U) - 1;
+	SYST_CVR = 0;
+
+	SYST_CSR = (1 << 2) | (1 << 0);
+
+	while(us--)
+	{
+		while(!(SYST_CSR & (1 << 16)));
+	}
+
+	SYST_CSR = 0;
 }
 
-static void mdelay(uint32_t cnt){
-	for(uint32_t i = 0 ; i< (cnt * 1000) ; i++);
-}
-
-static void udelay(uint32_t cnt){
-	for(uint32_t i = 0 ; i< (cnt * 1) ; i++);
+void mdelay(uint32_t ms)
+{
+	while(ms--)
+	{
+		udelay(1000);
+	}
 }

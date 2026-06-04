@@ -9,12 +9,6 @@
 #define LCD_H_
 
 #include "stm32f446xx.h"
-/*
- * bsp exposed APIs
- */
-void lcd_init(void);
-void lcd_send_cmd(uint8_t cmd);
-void lcd_display_clear_cmd(void);
 
 /*
  * Application Configurable Lines
@@ -32,7 +26,7 @@ D7	PA7
 
 #define LCD_GPIO_PORT				GPIOA
 #define LCD_GPIO_PIN_RS				GPIO_PIN_NO_3
-#define LCD_GPIO_PIN_EN				GPIO_PIN_NO_2
+#define LCD_GPIO_PIN_EN				GPIO_PIN_NO_5
 #define LCD_GPIO_PIN_D4				GPIO_PIN_NO_10
 #define LCD_GPIO_PIN_D5				GPIO_PIN_NO_8
 #define LCD_GPIO_PIN_D6				GPIO_PIN_NO_9
@@ -46,5 +40,19 @@ D7	PA7
 #define LCD_CMD_INCADD				0x06
 #define LCD_CMD_DIS_CLEAR			0x01
 #define LCD_CMD_DIS_RETURN_HOME		0x02
+
+/*
+ * bsp exposed APIs
+ */
+void lcd_init(void);
+void lcd_send_cmd(uint8_t cmd);
+void lcd_display_clear_cmd(void);
+void lcd_display_clear_cmd(void);
+void lcd_display_return_home(void);
+void lcd_print_char(uint8_t data);
+void lcd_print_string(char *msg);
+void lcd_set_cursor(uint8_t row , uint8_t col);
+void mdelay(uint32_t cnt);
+void udelay(uint32_t cnt);
 
 #endif /* LCD_H_ */

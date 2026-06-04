@@ -7,6 +7,7 @@
 
 #include <stdio.h>
 #include "ds1307.h"
+#include "lcd.h"
 
 char *get_day_of_week(uint8_t i);
 char *time_to_string(RTC_time_t *rtc_time);
@@ -45,6 +46,15 @@ int main(void)
 
 	printf("RTC test\n");
 
+	lcd_init();
+
+	lcd_print_string("RTC Test....");
+
+	mdelay(2000);
+
+	lcd_display_clear_cmd();
+	lcd_display_return_home();
+
 	if(ds1307_init())
 	{
 		printf("RTC init has failed\n");
@@ -75,15 +85,19 @@ int main(void)
 	{
 		am_pm = (current_time.time_format == TIME_FORMAT_12HR_PM) ? "PM" : "AM";
 
-		printf("Current Time : %s %s\n",time_to_string(&current_time),am_pm);
+		//printf("Current Time : %s %s\n",time_to_string(&current_time),am_pm);
+		lcd_print_string(time_to_string(&current_time));
+		lcd_print_string(am_pm);
 	}
 	else
 	{
-		printf("Current Time : %s\n",time_to_string(&current_time));
+		//printf("Current Time : %s\n",time_to_string(&current_time));
+		lcd_print_string(time_to_string(&current_time));
 	}
 
-	printf("Current Date : %s <%s>\n",date_to_string(&current_date),get_day_of_week(current_date.day));
-
+	//printf("Current Date : %s <%s>\n",date_to_string(&current_date),get_day_of_week(current_date.day));
+	lcd_set_cursor(2, 1);
+	lcd_print_string(date_to_string(&current_date));
 	while(1);
 
 	return 0;
@@ -94,34 +108,44 @@ void SysTick_Handler(void){
 	RTC_date_t current_date;
 
 	ds1307_set_current_time(&current_time);
+
+	lcd_set_cursor(1, 1);
 	char *am_pm;
 
 	if(current_time.time_format != TIME_FORMAT_24HR)
 	{
 		am_pm = (current_time.time_format == TIME_FORMAT_12HR_PM) ? "PM" : "AM";
 
-		printf("Current Time : %s %s\n",time_to_string(&current_time),am_pm);
+		//printf("Current Time : %s %s\n",time_to_string(&current_time),am_pm);
+		lcd_print_string(time_to_string(&current_time));
+		lcd_print_string(am_pm);
 	}
 	else
 	{
-		printf("Current Time : %s\n",time_to_string(&current_time));
+		//printf("Current Time : %s\n",time_to_string(&current_time));
+		lcd_print_string(time_to_string(&current_time));
 	}
 
 	ds1307_set_current_date(&current_date);
-	printf("Current Date : %s <%s>\n",date_to_string(&current_date),get_day_of_week(current_date.day));
+	//printf("Current Date : %s <%s>\n",date_to_string(&current_date),get_day_of_week(current_date.day));
+	lcd_set_cursor(2, 1);
+	lcd_print_string(date_to_string(&current_date));
+	lcd_print_char('<');
+	lcd_print_string(get_day_of_week(current_date.day));
+	lcd_print_char('>');
 }
 
 char *get_day_of_week(uint8_t i)
 {
 	static char *days[] =
 	{
-		"Sunday",
-		"Monday",
-		"Tuesday",
-		"Wednesday",
-		"Thursday",
-		"Friday",
-		"Saturday"
+		"Sun",
+		"Mon",
+		"Tues",
+		"Wed",
+		"Thu",
+		"Fri",
+		"Sat"
 	};
 
 	return days[i - 1];

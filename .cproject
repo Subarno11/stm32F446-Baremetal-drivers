@@ -78,11 +78,15 @@
 							<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.symbolsrec.20811804" name="MCU Output Converter Motorola S-rec with symbols" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.objcopy.symbolsrec"/>
 						</toolChain>
 					</folderInfo>
+					<fileInfo id="com.st.stm32cube.ide.mcu.gnu.managedbuild.config.exe.debug.1545394979.963990135" name="ds1307.h" rcbsApplicability="disable" resourcePath="bsp/ds1307.h" toolsToInvoke=""/>
+					<fileInfo id="com.st.stm32cube.ide.mcu.gnu.managedbuild.config.exe.debug.1545394979.330628809" name="ds1307.c" rcbsApplicability="disable" resourcePath="bsp/ds1307.c" toolsToInvoke="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.579718782.1512911582">
+						<tool id="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.579718782.1512911582" name="MCU/MPU GCC Compiler" superClass="com.st.stm32cube.ide.mcu.gnu.managedbuild.tool.c.compiler.579718782"/>
+					</fileInfo>
 					<sourceEntries>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Inc"/>
-						<entry excluding="018usart_transmissionIT.c|017uart_rx.c|016uart_tx.c|015i2c_SlaveSTM32_chunkingData.c|014_i2c_SlaveSTM32IT.c|013i2c_master_rx_EventDrivenStateMachine.c|012i2c_master_rx_testingIT2.c|011i2c_master_rx_testing.c|010i2c_master_tx_testing.c|009spi_msg_rcv_it.c|008spi_cmd_handling.c|syscalls.c|007spi_txonly_arduino.c|002led_button.c|006spi_tx_testing.c|005button_intterupt.c|003ledToggleExtBtn.c|001led_toggle.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Src"/>
+						<entry excluding="Project_RTC_LCD.c|018usart_transmissionIT.c|017uart_rx.c|016uart_tx.c|015i2c_SlaveSTM32_chunkingData.c|014_i2c_SlaveSTM32IT.c|013i2c_master_rx_EventDrivenStateMachine.c|012i2c_master_rx_testingIT2.c|011i2c_master_rx_testing.c|010i2c_master_tx_testing.c|009spi_msg_rcv_it.c|008spi_cmd_handling.c|syscalls.c|007spi_txonly_arduino.c|002led_button.c|006spi_tx_testing.c|005button_intterupt.c|003ledToggleExtBtn.c|001led_toggle.c" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Src"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="Startup"/>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="bsp"/>
+						<entry excluding="ds1307.c|ds1307.h" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="bsp"/>
 						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="drivers"/>
 					</sourceEntries>
 				</configuration>
